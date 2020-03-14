@@ -1,18 +1,17 @@
 # build ontop of official Java image
-FROM gradle:6.2.2-jdk8
+# offical gradle image based on ubuntu bionic
+FROM gradle:6.2.2-jdk11
 USER root
 
 ENV \
-    BUILD_DEPS="apt-transport-https gnupg2 software-properties-common"  \
     RUNTIME_DEPS="tar docker unzip curl git openssh-client ca-certificates docker-compose gettext-base"
 
 RUN \
-    apt-get update && \
-    apt-get install -y $BUILD_DEPS &&  \
-    apt-get install -y $RUNTIME_DEPS && \
+    apt update && \
+    apt upgrade -y && \
+    apt install -y $RUNTIME_DEPS && \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
-    apt-get remove -y $BUILD_DEPS && \
-    apt-get clean
+    apt clean
 
 RUN mkdir /app
 WORKDIR /app
