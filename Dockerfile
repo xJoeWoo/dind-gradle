@@ -1,6 +1,6 @@
 # build ontop of official Java image
 # offical gradle image based on ubuntu bionic
-FROM gradle:6.5.1-jdk11
+FROM gradle:6.7-jdk11
 USER root
 
 ENV \
